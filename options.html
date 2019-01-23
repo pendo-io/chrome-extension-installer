@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button {
+        height: 30px;
+        width: 30px;
+        outline: none;
+        margin: 10px;
+      }
+
+      #newKey {
+        width:350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="buttonDiv">
+    </div>
+
+    <div>
+      <p>Where do you want to test Pendo?</p>
+    </div>
+    
+    <div id="urlList"></div>
+
+    <input type='text' id='newURL' value='example.com'/>
+    <input type='button' value='Submit' id='addURL' />
+
+
+    <div>
+      <p>What's your Pendo API key?</p>
+    </div>
+    
+    <div id="apiKeyContent"></div>
+
+    <input type='text' id='newKey' value='0000-0000-0000'/>
+    <input type='button' value='Submit' id='addKey' />
+
+
+
+  </body>
+  <script src="options.js"></script>
+</html>
