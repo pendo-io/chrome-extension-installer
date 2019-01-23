@@ -31,38 +31,39 @@ function extractHostname(url) {
 }
 
 // url configuration
-document.getElementById("addURL2").onclick = function() {
-  var text = document.getElementById("newURL2").value;
-  
-  var cleanText = extractHostname(text);
-  chrome.storage.sync.set({pendoURL: cleanText});
+document.getElementById("addURL").onclick = function() {
+  var rawURL = document.getElementById("newURL").value;  
+  var cleanURL = extractHostname(rawURL);
+  chrome.storage.sync.set({pendoURL: cleanURL});
   location.reload();
 }
 
 
 // api key configuration
-document.getElementById("addKey2").onclick = function() {
-  var text2 = document.getElementById("newKey2").value;
-  chrome.storage.sync.set({pendoKey: text2});
+document.getElementById("addKey").onclick = function() {
+  var newAPIKey = document.getElementById("newKey").value;
+  chrome.storage.sync.set({pendoKey: newAPIKey});
   location.reload();
 }
 
 
+
+
 // enter to submit
-var input = document.getElementById("newURL2");
+var input = document.getElementById("newURL");
 
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    document.getElementById("addURL2").click();
+    document.getElementById("addURL").click();
   }
 });
 
-var input = document.getElementById("newKey2");
+var input = document.getElementById("newKey");
 
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    document.getElementById("addKey2").click();
+    document.getElementById("addKey").click();
   }
 });
