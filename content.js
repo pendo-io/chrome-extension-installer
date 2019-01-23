@@ -17,11 +17,6 @@ chrome.runtime.onMessage.addListener(
             };
         });
 
-        // script.onload = function() {
-        //     window.postMessage({ type: "pendoKey", value: "9edd1221-0476-4b32-4684-ccb36fcfea72" }, "*");
-        // };
-
-
         (document.head || document.documentElement).appendChild(script);
 
 

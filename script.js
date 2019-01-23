@@ -8,11 +8,11 @@ v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++
 
   pendo.initialize({
     visitor: {
-        id:              'success!'   
+        id:              'test-user'   
     },
 
     account: {
-        id:           'success2!' 
+        id:           'test-account' 
     }
   });
 
@@ -28,16 +28,5 @@ window.addEventListener("message", function(event) {
     }
 }, false);
 
-
-
-// chrome.storage.sync.get('pendoKey', 
-//     function(data) {
-
-
-//         var pendoKey = data.pendoKey;
-
-//         pendoFunction(pendoKey);
-
-// });
 
 

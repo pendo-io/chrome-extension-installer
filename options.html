@@ -1,43 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-        margin: 10px;
-      }
 
-      #newKey {
-        width:350px;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="optionsPage.css" />
+
   </head>
   <body>
-    <div id="buttonDiv">
-    </div>
 
-    <div>
-      <p>Where do you want to test Pendo?</p>
-    </div>
+
+    <h1>Pendo Installer Setup</h1>
     
     <div id="urlList"></div>
-
-    <input type='text' id='newURL' value='example.com'/>
-    <input type='button' value='Submit' id='addURL' />
-
-
-    <div>
-      <p>What's your Pendo API key?</p>
-    </div>
-    
     <div id="apiKeyContent"></div>
 
-    <input type='text' id='newKey' value='0000-0000-0000'/>
-    <input type='button' value='Submit' id='addKey' />
+  <form>
+    
+    <div class="form-group">
+      <input type="text" id="newURL2" class="form-field" placeholder="example.com">
+      <label class="form-label">What's the URL that you want to test Pendo on?</label>
+      <input type='button' value='Update' id='addURL2' />
+    </div>
+    
+    <div class="form-group">
+      <input type="text" id="newKey2" class="form-field" placeholder="0000-0000-0000">
+      <label class="form-label">What's your Pendo API key?</label>
+      <input type='button' value='Update' id='addKey2' />
+    </div>
 
-
+    
+  </form> 
 
   </body>
   <script src="options.js"></script>
