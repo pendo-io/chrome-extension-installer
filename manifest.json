@@ -1,5 +1,6 @@
 {
     "name": "Pendo Injector",
+    "short_name": "Inject Pendo",
     "version": "1.0",
     "description": "Install Pendo in your browser!",
     "permissions": ["tabs","activeTab","declarativeContent","storage"],
@@ -34,4 +35,7 @@
     "manifest_version": 2,
 
     "web_accessible_resources": ["script.js"]
+
+
+
 }

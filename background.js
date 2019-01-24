@@ -1,6 +1,13 @@
-// chrome.runtime.onInstalled.addListener(function() {
-//   chrome.storage.sync.set({pendoURL: "example.com"});
-// });
+chrome.runtime.onInstalled.addListener(function() {
+
+  chrome.tabs.create({
+    url: 'chrome-extension://pfjnonnnpnflinhehnpgobbgbfibkcoi/options.html',
+    active: true
+  });
+
+  return false;
+
+});
 
 
 

@@ -1,10 +1,9 @@
-
-@import url(https://fonts.googleapis.com/css?family=Quantico);
+@import "https://fonts.googleapis.com/css?family=Ubuntu:400";
 
 body {
   background-color: #eeeeee;
   width: 100vw;
-  font-family: "Quantico";
+  font-family: 'Ubuntu', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +13,11 @@ body {
 
 
 form {
-    width:80%;
+    width:100%;
     position: relative;
     padding: 15px 0 0;
     margin-top: 10px;
+    margin-left: 65%;
 }
 
 
@@ -28,14 +28,13 @@ form {
 }
 
 .form-field {
-  font-family: inherit;
-  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  width: 30%;
   font-size: 16px;
-  padding: 7px 4px;
+  padding: 15px 4px;
   background: transparent;
   transition: border-color 0.2s;
   box-sizing: border-box;
-  width: 100%;
   margin: 0 0 1em 0;
   border: 1px solid #8b1c20;
   background: #eeeeee;
@@ -43,10 +42,6 @@ form {
   outline: none;
 }
 
-input[type="text"],
-input[type="email"] {
-    height: calc(3em + 2px);
-}
 
 .form-field::placeholder {
   color: transparent;
@@ -61,7 +56,7 @@ input[type="email"] {
 label,
 .form-field:focus ~ .form-label {
   position: absolute;
-  top: 5px;
+  top: 2px;
   left: 8px;
   display: block;
   transition: 0.2s;
@@ -78,8 +73,8 @@ label,
 }
 
 .form-field:focus {
-  padding-bottom: 6px;
-  border: 1px solid #8b1c20;
+/*  padding-bottom: 6px;
+*/  border: 3px solid red;
 }
 
 .form-field:valid {
@@ -90,3 +85,22 @@ label,
   color: #ec2059;
 }
 
+
+.btn {
+    color: white;   
+    background-color: #ec2059;
+    outline:0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.btn:hover{
+  background-color:#b71542;
+}
+.btn-square {
+    border:0;
+}
+
+.btn-lg {
+    font-size: 1.2em;
+    padding: 15px;
+}
