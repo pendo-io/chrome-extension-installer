@@ -1,9 +1,11 @@
 chrome.runtime.onInstalled.addListener(function() {
 
   chrome.tabs.create({
-    url: 'chrome-extension://pfjnonnnpnflinhehnpgobbgbfibkcoi/options.html',
+    'url': 'chrome://extensions/?options=' + chrome.runtime.id,
     active: true
   });
+
+
 
   return false;
 
