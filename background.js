@@ -1,10 +1,9 @@
 chrome.runtime.onInstalled.addListener(function() {
 
   chrome.tabs.create({
-    'url': 'chrome://extensions/?options=' + chrome.runtime.id,
+    url: 'chrome-extension://' + chrome.runtime.id + '/options.html',
     active: true
   });
-
 
 
   return false;
