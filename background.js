@@ -51,9 +51,8 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
         chrome.storage.sync.get('pendoURL', function(data) {
           var urlList = data.pendoURL;
-          
 
-          if (urlList.includes(newURL)) {
+          if (typeof urlList !== 'undefined' && urlList.includes(newURL)) {
             pendoMessage();
           }
 

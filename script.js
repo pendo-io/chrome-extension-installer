@@ -21,8 +21,6 @@ v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++
 window.addEventListener("message", function(event) {
     if(event.data.type === 'pendoKey') {
         window._pendoKeyValue = event.data.value;
-        console.log('key:', _pendoKeyValue);
-
         pendoFunction(_pendoKeyValue);
 
     }
