@@ -21,10 +21,17 @@ v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++
 window.addEventListener("message", function(event) {
     if(event.data.type === 'pendoKey') {
         window._pendoKeyValue = event.data.value;
-        pendoFunction(_pendoKeyValue);
-
-    }
+        pendoFunction(_pendoKeyValue);      
+    };
 }, false);
+
+
+
+// function myFunction() {
+//   window.postMessage({ pendoStatus: "success"}, "*");
+// };
+
+// setTimeout(myFunction, 1000);
 
 
 

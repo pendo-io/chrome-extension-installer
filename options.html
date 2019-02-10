@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <link rel="stylesheet" type="text/css" href="optionsPage.css" />
   </head>
   <body>
-
-
-    <h1>Pendo Installer Setup</h1>
+    <h1>Pendo Installer Settings</h1>
     
-    <div id="urlList"></div>
-    <div id="apiKeyContent"></div>
-
-  <form>
-    
-    <div class="form-group">
-      <input type="text" id="newURL" class="form-field" placeholder="example.com">
-      <label class="form-label">What's the URL that you want to test Pendo on?</label>
-      <input type='button' value='Update' id='addURL' class="btn btn-square btn-lg btn-filled-green"/>
+    <div class="status-text">
+      <div id="PendoStatus"></div>  
+      <div id="CSPStatus"></div>      
     </div>
-    
-    <div class="form-group">
-      <input type="text" id="newKey" class="form-field" placeholder="0000-0000-0000">
-      <label class="form-label">What's your Pendo API key?</label>
-      <input type='button' value='Update' id='addKey' class="btn btn-square btn-lg btn-filled-green"/>
-    </div>
+      
+    <form>
+      
+      <div class="form-group">
+        <input type="text" id="newURL" class="form-field">
+        <label class="form-label">What's your app's URL? (required)</label>
+        <input type='button' value='Update' id='addURL' class="btn btn-square btn-lg"/>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="newKey" class="form-field">
+        <label class="form-label">What's your Pendo API key? (required)</label>
+        <input type='button' value='Update' id='addKey' class="btn btn-square btn-lg"/>
+      </div>
 
-    
-  </form> 
+      <div class="switch-group">
+        <div class="switch_label">Disable CSP Headers (try this if the extension doesn't work)</div>
+        <div class="switch-container">
+          <label class="switch">
+            <input type="checkbox" id="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="switch-group">
+        <div class="switch_label">Turn Pendo extension on/off</div>
+        <div class="switch-container">
+          <label class="switch">
+            <input type="checkbox" id="checkbox2">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+    </form> 
+
+    <div id="app-launch-container"></div>
 
   </body>
+
+  <footer>
+    <img id="logo" src="/images/pendo-logo.png"/></footer>
+  </footer>
+  
   <script src="options.js"></script>
 </html>

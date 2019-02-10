@@ -1,23 +1,37 @@
-@import "https://fonts.googleapis.com/css?family=Ubuntu:400";
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
   background-color: #eeeeee;
   width: 100vw;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   overflow: auto;
+  padding-top:10%;
 }
 
+a {
+  text-decoration: none;
+}
+
+footer {
+  padding-top: 5%;
+}
+
+#logo {
+  width: 25%;
+  padding-left:37%;
+}
 
 form {
-    width:100%;
-    position: relative;
-    padding: 15px 0 0;
-    margin-top: 10px;
-    margin-left: 65%;
+  width:100%;
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  margin-left: 65%;
+  margin-bottom: 5%;
 }
 
 
@@ -28,7 +42,7 @@ form {
 }
 
 .form-field {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   width: 30%;
   font-size: 16px;
   padding: 15px 4px;
@@ -43,20 +57,10 @@ form {
 }
 
 
-.form-field::placeholder {
-  color: transparent;
-}
-
-.form-field:placeholder-shown ~ .form-label {
-  font-size: 16px;
-  cursor: text;
-  top: 20px;
-}
-
 label,
 .form-field:focus ~ .form-label {
   position: absolute;
-  top: 2px;
+  top: 0px;
   left: 8px;
   display: block;
   transition: 0.2s;
@@ -73,34 +77,120 @@ label,
 }
 
 .form-field:focus {
-/*  padding-bottom: 6px;
-*/  border: 3px solid red;
+  border: 3px solid red;
 }
 
 .form-field:valid {
-    border-color: #ec2059;
+  border-color: #ec2059;
+  padding-left:12px;
 }
 
 .form-field:valid ~ .form-label {
   color: #ec2059;
 }
 
-
 .btn {
-    color: white;   
-    background-color: #ec2059;
-    outline:0;
-    font-family: 'Ubuntu', sans-serif;
+  color: white;   
+  background-color: #ec2059;
+  outline:0;
+  font-family: 'Montserrat', sans-serif;    
 }
 
-.btn:hover{
+.btn:hover {
   background-color:#b71542;
+  cursor: pointer;
 }
+
 .btn-square {
-    border:0;
+  border:0;
 }
 
 .btn-lg {
-    font-size: 1.2em;
-    padding: 15px;
+  font-size: 1.2em;
+  padding: 15px;
+  margin-left: 5px;
+}
+
+.btn-filled-green {
+  background-color: #A8D6CD;
+}
+
+.btn-filled-green:hover {
+  background-color: #98bfb8;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 83px;
+  height: 46px;
+  left:1px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 38px;
+  width: 37px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ec2059;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ec2059;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(37px);
+  -ms-transform: translateX(37px);
+  transform: translateX(37px);
+}
+
+.status-text {
+  font-size: 14px;
+  text-align: center;
+}
+
+.switch-container {
+  margin-right:30%;
+}
+
+.switch_label {
+  float:left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #ec2059;
+  width: 30%;
+  margin-top: 15px;
+  margin-left: 2px;
+  margin-right: 7px;
+}
+
+.switch-group {
+  margin-top: 25px;
 }
