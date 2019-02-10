@@ -16,14 +16,14 @@ chrome.runtime.onMessage.addListener(
                 window.postMessage({ type: "pendoKey", value: keyValue}, "*");
             };
         });
-
+        
         (document.head || document.documentElement).appendChild(script);
-
-
+        
     }
 );
 
-    
+
+// chrome.runtime.sendMessage({type: "success"});
 
 
 
