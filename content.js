@@ -23,8 +23,6 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-// chrome.runtime.sendMessage({type: "success"});
-
 
 
 

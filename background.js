@@ -8,7 +8,6 @@ chrome.runtime.onInstalled.addListener(function() {
     active: true
   });
 
-
   return false;
 
 });
@@ -60,12 +59,6 @@ var onHeadersReceived = function(details) {
 };
 
 
-// chrome.runtime.onMessage.addListener(function(request, sender) {
-//     if (request.type == "success") {
-//       pendoStatus = true;
-//     }
-// });
-
 
 var updateUI = function() {
   var iconName = pendoStatus ? 'on' : 'off';
@@ -80,14 +73,36 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (changeInfo.status === 'complete') {
     var filterDomain;
     var url = tab.url.split('#')[0]; // Exclude URL fragments
+    var newURL = location.port;
 
-    newURL = extractHostname(url);
+    if (!url.includes("local")) {
+      newURL = extractHostname(url);
+    }
 
     chrome.storage.sync.get(['pendoURL','pendoSwitch'], function(data) {
       var urlList = data.pendoURL;
       pendoStatus = data.pendoSwitch;
 
-      filterDomain = data.pendoURL;                                  
+      filterDomain = data.pendoURL;   
+
+    if (filterDomain) {     
+      chrome.storage.sync.get('cspSwitch', function(data) {  
+        isCSPDisabled = data.cspSwitch;
+        var filterURL = filterDomain;
+
+        if (!filterURL.includes("local")) {
+          filterURL = "*://" + filterDomain + "/*";
+        }
+
+        var filter = {
+          urls: [filterURL],
+          types: ["main_frame", "sub_frame"]
+        };
+
+        chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, filter, ["blocking", "responseHeaders"]);     
+        
+      });
+    }     
 
       if (pendoStatus===true && typeof urlList !== 'undefined' && urlList.includes(newURL)) {
         pendoMessage();
@@ -97,17 +112,9 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         updateUI();
       }                    
     });
-              
-    chrome.storage.sync.get('cspSwitch', function(data) {  
-      isCSPDisabled = data.cspSwitch;
-      
-      var filterURL = "*://" + filterDomain + "/*";
-      var filter = {
-        urls: [filterURL],
-        types: ["main_frame", "sub_frame"]
-      };
-      chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, filter, ["blocking", "responseHeaders"]);
-    });
+    
+          
+    
   };
 });
 
@@ -120,6 +127,7 @@ chrome.browserAction.onClicked.addListener(function() {
   });
   
 });
+
 
 
 

@@ -27,11 +27,5 @@ window.addEventListener("message", function(event) {
 
 
 
-// function myFunction() {
-//   window.postMessage({ pendoStatus: "success"}, "*");
-// };
-
-// setTimeout(myFunction, 1000);
-
 
 
