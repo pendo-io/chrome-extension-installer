@@ -1,24 +1,30 @@
 var pendoStatus = true;
 
+// display the current URL
 chrome.storage.sync.get('pendoURL', function(data) {
 
   if (data.pendoURL) {
     var urlList = data.pendoURL;
-    var a = document.createElement('a');
+    // var a = document.createElement('a');
 
-    a.href = 'http://' + urlList;    
-    a.target = '_blank';
+    // a.href = 'http://' + urlList;    
+    // a.target = '_blank';
 
     document.getElementById("newURL").value = urlList;
     
     var btn = document.createElement("a");    
-
     var t = document.createTextNode("Go to your app");
     btn.appendChild(t); 
-
     btn.className = "btn btn-square btn-lg btn-filled-green";
-    btn.setAttribute('href', 'https://' + urlList);
     btn.setAttribute('target', '_blank');
+
+    if (urlList.includes("localhost")) {
+      btn.setAttribute('href', urlList);
+    }
+
+    else {
+      btn.setAttribute('href', 'https://' + urlList);
+    }
 
     document.getElementById('app-launch-container').appendChild(btn);
 
@@ -26,7 +32,7 @@ chrome.storage.sync.get('pendoURL', function(data) {
 
 });
 
-
+// display the current API key
 chrome.storage.sync.get('pendoKey', function(data) {
   if (data.pendoKey) {
     var apiKeyContent = data.pendoKey;
@@ -85,10 +91,17 @@ function extractHostname(url) {
 
 // url configuration
 document.getElementById("addURL").onclick = function() {
-  var rawURL = document.getElementById("newURL").value;  
-  var cleanURL = extractHostname(rawURL);
+  var rawURL = document.getElementById("newURL").value; 
 
-  chrome.storage.sync.set({pendoURL: cleanURL});
+  if (rawURL.includes("localhost")) {
+    chrome.storage.sync.set({pendoURL: rawURL});
+  }
+
+  else {
+    var cleanURL = extractHostname(rawURL);
+    chrome.storage.sync.set({pendoURL: cleanURL});
+  }
+
   location.reload();
 }
 
