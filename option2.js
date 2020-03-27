@@ -1,4 +1,5 @@
 var pendoStatus = true;
+
 // display the current URL
 chrome.storage.sync.get('pendoURL', function(data) {
   if (data.pendoURL) {
@@ -21,6 +22,8 @@ chrome.storage.sync.get('pendoURL', function(data) {
     document.getElementById('app-launch-container').appendChild(btn);
   }
 });
+
+
 // display the current API key
 chrome.storage.sync.get('pendoKey', function(data) {
   if (data.pendoKey) {
@@ -28,6 +31,8 @@ chrome.storage.sync.get('pendoKey', function(data) {
     document.getElementById("newKey").value = apiKeyContent;
   }
 });
+
+
 // display the current email for visitorID
 chrome.storage.sync.get('visitorId', function(data) {
   if (data.visitorId) {
@@ -35,6 +40,8 @@ chrome.storage.sync.get('visitorId', function(data) {
     document.getElementById("visitor").value = visitorEmail;
   }
 });
+
+
 chrome.storage.sync.get('pendoSwitch', function(data) {
   if(!data.pendoSwitch){
     document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently off";
@@ -42,6 +49,8 @@ chrome.storage.sync.get('pendoSwitch', function(data) {
   }
   document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently on";
 });
+
+
 chrome.storage.sync.get('cspSwitch', function(data) {
   var cspStatus = data.cspSwitch;
   if (cspStatus===true) {
@@ -52,6 +61,9 @@ chrome.storage.sync.get('cspSwitch', function(data) {
     });
   }
 });
+
+
+
 function extractHostname(url) {
   var hostname;
   //find & remove protocol (http, ftp, etc.) and get hostname
@@ -67,6 +79,7 @@ function extractHostname(url) {
   hostname = hostname.split('?')[0];
   return hostname;
 }
+
 // url configuration
 document.getElementById("addURL").onclick = function() {
   var rawURL = document.getElementById("newURL").value;
@@ -91,6 +104,8 @@ document.getElementById("addVisitor").onclick = function() {
   chrome.storage.sync.set({visitorId: newVisitorId});
   location.reload();
 }
+
+
 // CSP configuration
 // chrome.storage.sync.set({cspSwitch: true});
 chrome.storage.sync.get('cspSwitch', function(data) {
@@ -107,6 +122,10 @@ chrome.storage.sync.get('cspSwitch', function(data) {
     document.getElementById("checkbox").checked = true;
   }
 });
+
+
+
+
 //Turn Pendo extension on/off
 chrome.storage.sync.get('pendoSwitch', function(data) {
   pendoStatus = data.pendoSwitch;
@@ -118,22 +137,31 @@ chrome.storage.sync.get('pendoSwitch', function(data) {
     document.getElementById("checkbox2").checked = true;
   }
 });
+
+
+
+
+
+
 // enter to submit
 var input = document.getElementById("newURL");
 var input2 = document.getElementById("newKey");
 var input3 = document.getElementById("visitor");
+
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     document.getElementById("addURL").click();
   }
 });
+
 input2.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     document.getElementById("addKey").click();
   }
 });
+
 input3.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
