@@ -1,4 +1,4 @@
-function pendoFunction(apiKey){
+function pendoFunction(apiKey, visitorId){
 
 (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];
 v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++w)(function(m){
@@ -8,7 +8,7 @@ v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++
 
   pendo.initialize({
     visitor: {
-        id:              'test-user'   
+        id:              visitorId   
     },
 
     account: {
@@ -20,12 +20,8 @@ v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++
 
 window.addEventListener("message", function(event) {
     if(event.data.type === 'pendoKey') {
-        window._pendoKeyValue = event.data.value;
-        pendoFunction(_pendoKeyValue);      
+        window._pendoKeyValue = event.data.value[0];
+        window._pendoVisitorIdValue = event.data.value[1];
+        pendoFunction(_pendoKeyValue, _pendoVisitorIdValue); 
     };
 }, false);
-
-
-
-
-
