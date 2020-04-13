@@ -1,7 +1,7 @@
 {
     "name": "Pendo Injector",
     "short_name": "Inject Pendo",
-    "version": "1.3",
+    "version": "1.4",
     "description": "Install Pendo in your browser!",
     "permissions": ["tabs","activeTab","declarativeContent","storage","webRequest","webRequestBlocking","browsingData","http://*/*","https://*/*"],
     "background": {
