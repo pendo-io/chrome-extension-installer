@@ -9,7 +9,7 @@ body {
   align-items: center;
   flex-direction: column;
   overflow: auto;
-  padding-top:10%;
+  padding-top:3%;
 }
 
 a {
@@ -31,7 +31,7 @@ form {
   padding: 15px 0 0;
   margin-top: 10px;
   margin-left: 65%;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 
 

@@ -9,11 +9,12 @@ chrome.runtime.onMessage.addListener(
         };
 
         //content script
-        chrome.storage.sync.get(['pendoKey','visitorId'], function(data) {
+        chrome.storage.sync.get(['pendoKey','visitorId', 'lightningSwitch'], function(data) {
             var keyValue = data.pendoKey;
             var visitorId = data.visitorId;
+            var lightningOption = data.lightningSwitch;
             script.onload = function() {
-                window.postMessage({ type: "pendoKey", value: [keyValue, visitorId]}, "*");
+                window.postMessage({ type: "pendoKey", value: [keyValue, visitorId, lightningOption]}, "*");
             };
         });      
         
