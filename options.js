@@ -35,13 +35,19 @@ chrome.storage.sync.get('visitorId', function(data) {
     document.getElementById("visitor").value = visitorEmail;
   }
 });
-chrome.storage.sync.get('pendoSwitch', function(data) {
+
+chrome.storage.sync.get(['pendoSwitch','lightningSwitch'], function(data) {
   if(!data.pendoSwitch){
     document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently off";
     return;
   }
+  if(data.pendoSwitch && data.lightningSwitch){
+    document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently on Salesforce Lightning Mode";
+    return;
+  }
   document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently on";
 });
+
 chrome.storage.sync.get('cspSwitch', function(data) {
   var cspStatus = data.cspSwitch;
   if (cspStatus===true) {
@@ -51,7 +57,9 @@ chrome.storage.sync.get('cspSwitch', function(data) {
       document.getElementById('CSPStatus').innerHTML = string1+string2;
     });
   }
+
 });
+
 function extractHostname(url) {
   var hostname;
   //find & remove protocol (http, ftp, etc.) and get hostname
@@ -116,6 +124,18 @@ chrome.storage.sync.get('pendoSwitch', function(data) {
   }
   if (pendoStatus===true) {
     document.getElementById("checkbox2").checked = true;
+  }
+});
+
+//Turn Lightning option extension on/off
+chrome.storage.sync.get('lightningSwitch', function(data) {
+  lightningStatus = data.lightningSwitch;
+  document.getElementById("checkbox3").onclick = function() {
+    chrome.storage.sync.set({lightningSwitch: !lightningStatus});
+    location.reload();
+  }
+  if (lightningStatus===true) {
+    document.getElementById("checkbox3").checked = true;
   }
 });
 // enter to submit
