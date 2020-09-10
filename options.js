@@ -28,19 +28,19 @@ chrome.storage.sync.get('pendoKey', function(data) {
     document.getElementById("newKey").value = apiKeyContent;
   }
 });
-// display the current email for visitorID
+// display the current value for visitorID
 chrome.storage.sync.get('visitorId', function(data) {
   if (data.visitorId) {
-    var visitorEmail = data.visitorId;
-    document.getElementById("visitor").value = visitorEmail;
+    var visitorValue = data.visitorId;
+    document.getElementById("visitor").value = visitorValue;
   }
 });
 
 // display the current vlaue for accountID
 chrome.storage.sync.get('accountId', function(data) {
   if (data.accountId) {
-    var accountName = data.accountId;
-    document.getElementById("account").value = accountName;
+    var accountValue = data.accountId;
+    document.getElementById("account").value = accountValue;
   }
 });
 
