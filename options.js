@@ -110,6 +110,9 @@ document.getElementById("addVisitor").onclick = function() {
 // account ID configuration
 document.getElementById("addAccount").onclick = function() {
   var newAccountId = document.getElementById("account").value;
+  if (newAccountId == ''){
+    newAccountId = 'test-account';
+  }
   chrome.storage.sync.set({accountId: newAccountId});
   location.reload();
 }
