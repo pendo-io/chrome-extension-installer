@@ -104,6 +104,9 @@ document.getElementById("addKey").onclick = function() {
 // visitor ID configuration
 document.getElementById("addVisitor").onclick = function() {
   var newVisitorId = document.getElementById("visitor").value;
+  if (newVisitorId == ''){
+    newVisitorId = 'test-visitor';
+  }
   chrome.storage.sync.set({visitorId: newVisitorId});
   location.reload();
 }
