@@ -36,6 +36,14 @@ chrome.storage.sync.get('visitorId', function(data) {
   }
 });
 
+// display the current vlaue for accountID
+chrome.storage.sync.get('accountId', function(data) {
+  if (data.accountId) {
+    var accountName = data.accountId;
+    document.getElementById("account").value = accountName;
+  }
+});
+
 chrome.storage.sync.get(['pendoSwitch','lightningSwitch'], function(data) {
   if(!data.pendoSwitch){
     document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently off";
@@ -99,6 +107,12 @@ document.getElementById("addVisitor").onclick = function() {
   chrome.storage.sync.set({visitorId: newVisitorId});
   location.reload();
 }
+// account ID configuration
+document.getElementById("addAccount").onclick = function() {
+  var newAccountId = document.getElementById("account").value;
+  chrome.storage.sync.set({accountId: newAccountId});
+  location.reload();
+}
 // CSP configuration
 // chrome.storage.sync.set({cspSwitch: true});
 chrome.storage.sync.get('cspSwitch', function(data) {
@@ -142,6 +156,7 @@ chrome.storage.sync.get('lightningSwitch', function(data) {
 var input = document.getElementById("newURL");
 var input2 = document.getElementById("newKey");
 var input3 = document.getElementById("visitor");
+var input4 = document.getElementById("account");
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
@@ -158,5 +173,11 @@ input3.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     document.getElementById("addVisitor").click();
+  }
+});
+input4.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("addAccount").click();
   }
 });

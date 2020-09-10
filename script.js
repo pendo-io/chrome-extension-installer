@@ -1,4 +1,4 @@
-function pendoFunction(apiKey, visitorId, _lightningOption){
+function pendoFunction(apiKey, visitorId, accountId, _lightningOption){
 
   if(_lightningOption) {
 
@@ -10,7 +10,13 @@ function pendoFunction(apiKey, visitorId, _lightningOption){
         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
     })(apiKey);
         // Call this whenever information about your visitors becomes available
-    pendo.initialize({ apiKey: apiKey, visitor: {id: visitorId}});
+    pendo.initialize(
+      {
+        apiKey: apiKey,
+        visitor: {id: visitorId},
+        account: {id: accountId}
+      }
+    );
 
 
   console.log(_lightningOption);
@@ -27,11 +33,11 @@ function pendoFunction(apiKey, visitorId, _lightningOption){
 
   pendo.initialize({
     visitor: {
-        id:              visitorId   
+        id:              visitorId
     },
 
     account: {
-        id:           'test-account' 
+        id:           accoutId
     }
   });
 
@@ -45,7 +51,8 @@ window.addEventListener("message", function(event) {
     if(event.data.type === 'pendoKey') {
         window._pendoKeyValue = event.data.value[0];
         window._pendoVisitorIdValue = event.data.value[1];
-        window._lightningOption = event.data.value[2];
-        pendoFunction(_pendoKeyValue, _pendoVisitorIdValue, _lightningOption); 
+        window._pendoAccountIdValue = event.data.value[2];
+        window._lightningOption = event.data.value[3];
+        pendoFunction(_pendoKeyValue, _pendoVisitorIdValue, _pendoAccountIdValue, _lightningOption);
     };
 }, false);
