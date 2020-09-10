@@ -37,7 +37,7 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption){
     },
 
     account: {
-        id:           accoutId
+        id:           accountId
     }
   });
 
