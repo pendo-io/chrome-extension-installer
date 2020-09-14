@@ -149,14 +149,16 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (changeInfo.status === "complete") {
         var newDomain = extractHostname(tab.url);
         includedDomains = includedDomains || [];
-
-        if (includedDomains.includes(newDomain)) {
-            pendoStatus[tabId] = true;
-            startPendo(tab);
-        } else {
-            pendoStatus[tabId] = false;
-        }
-        updateUI(tabId);
+        chrome.storage.sync.get(["pendoSwitch"], function (data) {
+            var pendoSwitch = data.pendoSwitch;
+            if (!!pendoSwitch && includedDomains.includes(newDomain)) {
+                pendoStatus[tabId] = true;
+                startPendo(tab);
+            } else {
+                pendoStatus[tabId] = false;
+            }
+            updateUI(tabId);
+        });
     }
 });
 
