@@ -1,162 +1,168 @@
 var pendoStatus = true;
 // display the current URL
-chrome.storage.sync.get('pendoURL', function(data) {
-  if (data.pendoURL) {
-    var urlList = data.pendoURL;
-    // var a = document.createElement('a');
-    // a.href = 'http://' + urlList;
-    // a.target = '_blank';
-    document.getElementById("newURL").value = urlList;
-    var btn = document.createElement("a");
-    var t = document.createTextNode("Go to your app");
-    btn.appendChild(t);
-    btn.className = "btn btn-square btn-lg btn-filled-green";
-    btn.setAttribute('target', '_blank');
-    if (urlList.includes("localhost")) {
-      btn.setAttribute('href', urlList);
+chrome.storage.sync.get("pendoURL", function (data) {
+    if (data.pendoURL) {
+        var urlList = data.pendoURL;
+        var firstURL = urlList[0];
+        // var a = document.createElement('a');
+        // a.href = 'http://' + urlList;
+        // a.target = '_blank';
+        document.getElementById("newURL").value = urlList;
+        var btn = document.createElement("a");
+        var t = document.createTextNode("Go to your app");
+        btn.appendChild(t);
+        btn.className = "btn btn-square btn-lg btn-filled-green";
+        btn.setAttribute("target", "_blank");
+        if (firstURL.includes("localhost")) {
+            btn.setAttribute("href", firstURL);
+        } else {
+            btn.setAttribute("href", "https://" + firstURL);
+        }
+        document.getElementById("app-launch-container").appendChild(btn);
     }
-    else {
-      btn.setAttribute('href', 'https://' + urlList);
-    }
-    document.getElementById('app-launch-container').appendChild(btn);
-  }
 });
 // display the current API key
-chrome.storage.sync.get('pendoKey', function(data) {
-  if (data.pendoKey) {
-    var apiKeyContent = data.pendoKey;
-    document.getElementById("newKey").value = apiKeyContent;
-  }
+chrome.storage.sync.get("pendoKey", function (data) {
+    if (data.pendoKey) {
+        var apiKeyContent = data.pendoKey;
+        document.getElementById("newKey").value = apiKeyContent;
+    }
 });
 // display the current email for visitorID
-chrome.storage.sync.get('visitorId', function(data) {
-  if (data.visitorId) {
-    var visitorEmail = data.visitorId;
-    document.getElementById("visitor").value = visitorEmail;
-  }
+chrome.storage.sync.get("visitorId", function (data) {
+    if (data.visitorId) {
+        var visitorEmail = data.visitorId;
+        document.getElementById("visitor").value = visitorEmail;
+    }
 });
 
-chrome.storage.sync.get(['pendoSwitch','lightningSwitch'], function(data) {
-  if(!data.pendoSwitch){
-    document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently off";
-    return;
-  }
-  if(data.pendoSwitch && data.lightningSwitch){
-    document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently on Salesforce Lightning Mode";
-    return;
-  }
-  document.getElementById('PendoStatus').innerHTML = "This Pendo extension is currently on";
+chrome.storage.sync.get(["pendoSwitch", "lightningSwitch"], function (data) {
+    if (!data.pendoSwitch) {
+        document.getElementById("PendoStatus").innerHTML =
+            "This Pendo extension is currently off";
+        return;
+    }
+    if (data.pendoSwitch && data.lightningSwitch) {
+        document.getElementById("PendoStatus").innerHTML =
+            "This Pendo extension is currently on Salesforce Lightning Mode";
+        return;
+    }
+    document.getElementById("PendoStatus").innerHTML =
+        "This Pendo extension is currently on";
 });
 
-chrome.storage.sync.get('cspSwitch', function(data) {
-  var cspStatus = data.cspSwitch;
-  if (cspStatus===true) {
-    var string1 = "CSP headers are currently disabled for ";
-    chrome.storage.sync.get('pendoURL', function(data) {
-      var string2 = data.pendoURL;
-      document.getElementById('CSPStatus').innerHTML = string1+string2;
-    });
-  }
-
+chrome.storage.sync.get("cspSwitch", function (data) {
+    var cspStatus = data.cspSwitch;
+    if (cspStatus === true) {
+        var string1 = "CSP headers are currently disabled for ";
+        chrome.storage.sync.get("pendoURL", function (data) {
+            var string2 = data.pendoURL;
+            document.getElementById("CSPStatus").innerHTML = string1 + string2;
+        });
+    }
 });
 
-function extractHostname(url) {
-  var hostname;
-  //find & remove protocol (http, ftp, etc.) and get hostname
-  if (url.indexOf("//") > -1) {
-      hostname = url.split('/')[2];
-  }
-  else {
-      hostname = url.split('/')[0];
-  }
-  //find & remove port number
-  hostname = hostname.split(':')[0];
-  //find & remove "?"
-  hostname = hostname.split('?')[0];
-  return hostname;
+function extractHostname(pageURL) {
+    var hostname;
+
+    //find & remove protocol (http, ftp, etc.) and get hostname
+    if (pageURL.indexOf("//") > -1) {
+        hostname = pageURL.split("/")[2];
+    } else {
+        hostname = pageURL.split("/")[0];
+    }
+
+    //find & remove port number
+    hostname = hostname.split(":")[0];
+    //find & remove "?"
+    hostname = hostname.split("?")[0];
+
+    return hostname;
 }
+
 // url configuration
-document.getElementById("addURL").onclick = function() {
-  var rawURL = document.getElementById("newURL").value;
-  if (rawURL.includes("localhost")) {
-    chrome.storage.sync.set({pendoURL: rawURL});
-  }
-  else {
-    var cleanURL = extractHostname(rawURL);
-    chrome.storage.sync.set({pendoURL: cleanURL});
-  }
-  location.reload();
-}
+document.getElementById("addURL").onclick = function () {
+    var urlValue = document.getElementById("newURL").value;
+    var urlList = urlValue.split(",").map((v) => v.trim());
+    var urlsOut = [];
+    urlList.forEach((rawURL) => {
+        if (rawURL.includes("localhost")) {
+            urlsOut.push(rawURL);
+        } else {
+            urlsOut.push(extractHostname(rawURL));
+        }
+    });
+    chrome.storage.sync.set({ pendoURL: urlsOut });
+    location.reload();
+};
 // api key configuration
-document.getElementById("addKey").onclick = function() {
-  var newAPIKey = document.getElementById("newKey").value;
-  chrome.storage.sync.set({pendoKey: newAPIKey});
-  location.reload();
-}
+document.getElementById("addKey").onclick = function () {
+    var newAPIKey = document.getElementById("newKey").value;
+    chrome.storage.sync.set({ pendoKey: newAPIKey });
+    location.reload();
+};
 // visitor ID configuration
-document.getElementById("addVisitor").onclick = function() {
-  var newVisitorId = document.getElementById("visitor").value;
-  chrome.storage.sync.set({visitorId: newVisitorId});
-  location.reload();
-}
+document.getElementById("addVisitor").onclick = function () {
+    var newVisitorId = document.getElementById("visitor").value;
+    chrome.storage.sync.set({ visitorId: newVisitorId });
+    location.reload();
+};
+
 // CSP configuration
 // chrome.storage.sync.set({cspSwitch: true});
-chrome.storage.sync.get('cspSwitch', function(data) {
-  var cspStatus = data.cspSwitch;
-  document.getElementById("checkbox").onclick = function() {
-    chrome.storage.sync.set({cspSwitch: !cspStatus});
-    if (!cspStatus) {
-      chrome.browsingData.remove({}, {"serviceWorkers": true}, function () {});
-      location.reload();
+chrome.storage.sync.get("cspSwitch", function (data) {
+    var cspStatus = data.cspSwitch;
+    document.getElementById("checkbox").onclick = function () {
+        chrome.storage.sync.set({ cspSwitch: !cspStatus });
+        location.reload();
+    };
+    if (cspStatus === true) {
+        document.getElementById("checkbox").checked = true;
     }
-    location.reload();
-  }
-  if (cspStatus===true) {
-    document.getElementById("checkbox").checked = true;
-  }
 });
 //Turn Pendo extension on/off
-chrome.storage.sync.get('pendoSwitch', function(data) {
-  pendoStatus = data.pendoSwitch;
-  document.getElementById("checkbox2").onclick = function() {
-    chrome.storage.sync.set({pendoSwitch: !pendoStatus});
-    location.reload();
-  }
-  if (pendoStatus===true) {
-    document.getElementById("checkbox2").checked = true;
-  }
+chrome.storage.sync.get("pendoSwitch", function (data) {
+    pendoStatus = data.pendoSwitch;
+    document.getElementById("checkbox2").onclick = function () {
+        chrome.storage.sync.set({ pendoSwitch: !pendoStatus });
+        location.reload();
+    };
+    if (pendoStatus === true) {
+        document.getElementById("checkbox2").checked = true;
+    }
 });
 
 //Turn Lightning option extension on/off
-chrome.storage.sync.get('lightningSwitch', function(data) {
-  lightningStatus = data.lightningSwitch;
-  document.getElementById("checkbox3").onclick = function() {
-    chrome.storage.sync.set({lightningSwitch: !lightningStatus});
-    location.reload();
-  }
-  if (lightningStatus===true) {
-    document.getElementById("checkbox3").checked = true;
-  }
+chrome.storage.sync.get("lightningSwitch", function (data) {
+    lightningStatus = data.lightningSwitch;
+    document.getElementById("checkbox3").onclick = function () {
+        chrome.storage.sync.set({ lightningSwitch: !lightningStatus });
+        location.reload();
+    };
+    if (lightningStatus === true) {
+        document.getElementById("checkbox3").checked = true;
+    }
 });
+
 // enter to submit
 var input = document.getElementById("newURL");
 var input2 = document.getElementById("newKey");
 var input3 = document.getElementById("visitor");
-input.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("addURL").click();
-  }
+input.addEventListener("keyup", function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("addURL").click();
+    }
 });
-input2.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("addKey").click();
-  }
+input2.addEventListener("keyup", function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("addKey").click();
+    }
 });
-input3.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("addVisitor").click();
-  }
+input3.addEventListener("keyup", function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("addVisitor").click();
+    }
 });
