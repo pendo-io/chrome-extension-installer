@@ -161,32 +161,9 @@ chrome.storage.sync.get("lightningSwitch", function (data) {
 });
 
 // enter to submit
-var input = document.getElementById("newURL");
-var input2 = document.getElementById("newKey");
-var input3 = document.getElementById("visitor");
-var input4 = document.getElementById("account");
-
-input.addEventListener("keyup", function(event) {
+document.getElementById("updateMeta").addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    document.getElementById("addURL").click();
-  }
-});
-input2.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("addKey").click();
-    }
-});
-input3.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("addVisitor").click();
-    }
-});
-input4.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("addAccount").click();
+    document.getElementById("updateMeta").click();
   }
 });
