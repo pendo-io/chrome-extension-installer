@@ -1,35 +1,37 @@
 {
-    "name": "Pendo Injector",
+	"name": "Pendo Injector",
     "short_name": "Inject Pendo",
-    "version": "1.4",
+    "version": "2.0",
     "description": "Install Pendo in your browser!",
-    "permissions": ["tabs","activeTab","declarativeContent","storage","webRequest","webRequestBlocking","browsingData","http://*/*","https://*/*"],
-    "background": {
-      "scripts": ["background.js"],
-      "persistent": true
-    },
+	"permissions": [
+		"storage",
+		"tabs",
+		"webRequest",
+		"webRequestBlocking",
+		"http://*/*",
+		"https://*/*"
+	],
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": true
+	},
 
-    "browser_action": {
-    "default_title": "Pendo is not running on this page",
-    "default_icon": {
-      "16": "images/icon38-off.png"
-      }
-    },
+	"browser_action": {
+		"default_title": "Pendo is not running on this page",
+		"default_icon": {
+			"16": "images/icon38-off.png"
+		}
+	},
 
-    "icons": {
-      "32": "images/favicon-32x32.png",
-      "48": "images/favicon-48.png",
-      "128": "images/favicon-128.png"
-    },
-    "options_page": "options.html",
+	"options_page": "options.html",
 
-    "content_scripts": [ {
-        "matches": ["https://*/*","http://localhost/*"],
-        "js": ["content.js"]
-    }],
+	"icons": {
+		"32": "images/favicon-32x32.png",
+		"48": "images/favicon-48.png",
+		"128": "images/favicon-128.png"
+	},
 
-    "web_accessible_resources": ["script.js"],
+	"web_accessible_resources": ["script.js"],
 
-    "manifest_version": 2
-
+	"manifest_version": 2
 }

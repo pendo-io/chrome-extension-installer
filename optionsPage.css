@@ -78,6 +78,8 @@ label,
 
 .form-field:focus {
   border: 3px solid red;
+  padding-top: 13px;
+  padding-bottom: 13px;
 }
 
 .form-field:valid {
