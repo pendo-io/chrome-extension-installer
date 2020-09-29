@@ -7,7 +7,7 @@ chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accou
     var thisFrameUrl = new URL(window.location.href);
     var keyValue = data.pendoKey;
     var visitorId = data.visitorId;
-    var visitorId = data.accountId;
+    var accountId = data.accountId;
     var lightningOption = !!data.lightningSwitch;
 
     if (
