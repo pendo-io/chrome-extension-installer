@@ -1,12 +1,13 @@
 var includedDomains = [];
 var pendoIsActive;
 
-chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId','lightningSwitch'], function(data) {
+chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accountId', 'lightningSwitch'], function(data) {
     includedDomains = data.pendoURL;
     var pendoSwitch = data.pendoSwitch;
     var thisFrameUrl = new URL(window.location.href);
     var keyValue = data.pendoKey;
     var visitorId = data.visitorId;
+    var accountId = data.accountId;
     var lightningOption = !!data.lightningSwitch;
 
     if (
@@ -19,11 +20,10 @@ chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId','lightn
 
         script.onload = function () {
             this.remove();
-            window.postMessage({ type: "pendoInjectorKey", keyValue: keyValue, idValue: visitorId, lightningValue: lightningOption }, "*");
+            window.postMessage({ type: "pendoInjectorKey", keyValue: keyValue, visitorIdValue: visitorId, accountIdValue: accountId, lightningValue: lightningOption }, "*");
         };
 
         (document.head || document.documentElement).appendChild(script);
         pendoIsActive = true;
     }
 });
-

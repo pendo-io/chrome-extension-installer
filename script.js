@@ -1,4 +1,4 @@
-function pendoFunction(apiKey, visitorId, _lightningOption) {
+function pendoFunction(apiKey, visitorId, accountId, _lightningOption) {
     if (_lightningOption) {
         (function (apiKey) {
             (function (p, e, n, d, o) {
@@ -33,9 +33,11 @@ function pendoFunction(apiKey, visitorId, _lightningOption) {
         // Call this whenever information about your visitors becomes available
         pendo.initialize({
             apiKey: apiKey,
-            visitor: { id: visitorId },
+            visitor: {
+              id: visitorId
+            },
             account: {
-                id: "test-account",
+              id: accountId,
             },
         });
 
@@ -68,7 +70,7 @@ function pendoFunction(apiKey, visitorId, _lightningOption) {
             },
 
             account: {
-                id: "test-account",
+                id: accountId,
             },
         });
     }
@@ -79,11 +81,13 @@ window.addEventListener(
     function (event) {
         if (event.data.type === "pendoInjectorKey") {
             var _pendoKeyValue = event.data.keyValue;
-            var _pendoVisitorIdValue = event.data.idValue;
+            var _pendoVisitorIdValue = event.data.visitorIdValue;
+            var _pendoAccountIdValue = event.data.accountIdValue;
             var _lightningOption = event.data.lightningValue;
             pendoFunction(
                 _pendoKeyValue,
                 _pendoVisitorIdValue,
+                _pendoAccountIdValue,
                 _lightningOption
             );
         }

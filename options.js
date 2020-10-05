@@ -28,12 +28,20 @@ chrome.storage.sync.get("pendoKey", function (data) {
         document.getElementById("newKey").value = apiKeyContent;
     }
 });
-// display the current email for visitorID
-chrome.storage.sync.get("visitorId", function (data) {
-    if (data.visitorId) {
-        var visitorEmail = data.visitorId;
-        document.getElementById("visitor").value = visitorEmail;
-    }
+// display the current value for visitorID
+chrome.storage.sync.get('visitorId', function(data) {
+  if (data.visitorId) {
+    var visitorValue = data.visitorId;
+    document.getElementById("visitor").value = visitorValue;
+  }
+});
+
+// display the current vlaue for accountID
+chrome.storage.sync.get('accountId', function(data) {
+  if (data.accountId) {
+    var accountValue = data.accountId;
+    document.getElementById("account").value = accountValue;
+  }
 });
 
 chrome.storage.sync.get(["pendoSwitch", "lightningSwitch"], function (data) {
@@ -102,12 +110,23 @@ document.getElementById("addKey").onclick = function () {
     location.reload();
 };
 // visitor ID configuration
-document.getElementById("addVisitor").onclick = function () {
-    var newVisitorId = document.getElementById("visitor").value;
-    chrome.storage.sync.set({ visitorId: newVisitorId });
-    location.reload();
-};
-
+document.getElementById("addVisitor").onclick = function() {
+  var newVisitorId = document.getElementById("visitor").value;
+  if (newVisitorId == ''){
+    newVisitorId = 'test-visitor';
+  }
+  chrome.storage.sync.set({visitorId: newVisitorId});
+  location.reload();
+}
+// account ID configuration
+document.getElementById("addAccount").onclick = function() {
+  var newAccountId = document.getElementById("account").value;
+  if (newAccountId == ''){
+    newAccountId = 'test-account';
+  }
+  chrome.storage.sync.set({accountId: newAccountId});
+  location.reload();
+}
 // CSP configuration
 // chrome.storage.sync.set({cspSwitch: true});
 chrome.storage.sync.get("cspSwitch", function (data) {
@@ -148,11 +167,13 @@ chrome.storage.sync.get("lightningSwitch", function (data) {
 var input = document.getElementById("newURL");
 var input2 = document.getElementById("newKey");
 var input3 = document.getElementById("visitor");
-input.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("addURL").click();
-    }
+var input4 = document.getElementById("account");
+
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("addURL").click();
+  }
 });
 input2.addEventListener("keyup", function (event) {
     event.preventDefault();
@@ -165,4 +186,10 @@ input3.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
         document.getElementById("addVisitor").click();
     }
+});
+input4.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("addAccount").click();
+  }
 });
