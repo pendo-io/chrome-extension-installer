@@ -88,45 +88,42 @@ function extractHostname(pageURL) {
     return hostname;
 }
 
-// url configuration
-document.getElementById("addURL").onclick = function () {
-    var urlValue = document.getElementById("newURL").value;
-    var urlList = urlValue.split(",").map((v) => v.trim());
-    var urlsOut = [];
-    urlList.forEach((rawURL) => {
-        if (rawURL.includes("localhost")) {
-            urlsOut.push(rawURL);
-        } else {
-            urlsOut.push(extractHostname(rawURL));
-        }
-    });
-    chrome.storage.sync.set({ pendoURL: urlsOut });
-    location.reload();
-};
-// api key configuration
-document.getElementById("addKey").onclick = function () {
-    var newAPIKey = document.getElementById("newKey").value;
-    chrome.storage.sync.set({ pendoKey: newAPIKey });
-    location.reload();
-};
-// visitor ID configuration
-document.getElementById("addVisitor").onclick = function() {
+// update metadata
+document.getElementById("updateMeta").onclick = function () {
+  // url configuration
+  var urlValue = document.getElementById("newURL").value;
+  var urlList = urlValue.split(",").map((v) => v.trim());
+  var urlsOut = [];
+  urlList.forEach((rawURL) => {
+      if (rawURL.includes("localhost")) {
+          urlsOut.push(rawURL);
+      } else {
+          urlsOut.push(extractHostname(rawURL));
+      }
+  });
+  chrome.storage.sync.set({ pendoURL: urlsOut });
+
+  // api key configuration
+  var newAPIKey = document.getElementById("newKey").value;
+  chrome.storage.sync.set({ pendoKey: newAPIKey });
+
+  // visitor ID configuration
   var newVisitorId = document.getElementById("visitor").value;
   if (newVisitorId == ''){
     newVisitorId = 'test-visitor';
   }
   chrome.storage.sync.set({visitorId: newVisitorId});
-  location.reload();
-}
-// account ID configuration
-document.getElementById("addAccount").onclick = function() {
+
+  // account ID configuration
   var newAccountId = document.getElementById("account").value;
   if (newAccountId == ''){
     newAccountId = 'test-account';
   }
   chrome.storage.sync.set({accountId: newAccountId});
+
   location.reload();
 }
+
 // CSP configuration
 // chrome.storage.sync.set({cspSwitch: true});
 chrome.storage.sync.get("cspSwitch", function (data) {
@@ -164,32 +161,9 @@ chrome.storage.sync.get("lightningSwitch", function (data) {
 });
 
 // enter to submit
-var input = document.getElementById("newURL");
-var input2 = document.getElementById("newKey");
-var input3 = document.getElementById("visitor");
-var input4 = document.getElementById("account");
-
-input.addEventListener("keyup", function(event) {
+document.getElementById("updateMeta").addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    document.getElementById("addURL").click();
-  }
-});
-input2.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("addKey").click();
-    }
-});
-input3.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("addVisitor").click();
-    }
-});
-input4.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("addAccount").click();
+    document.getElementById("updateMeta").click();
   }
 });
