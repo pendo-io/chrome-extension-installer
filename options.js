@@ -9,9 +9,9 @@ chrome.storage.sync.get("pendoURL", function (data) {
         // a.target = '_blank';
         document.getElementById("newURL").value = urlList;
         var btn = document.createElement("a");
-        var t = document.createTextNode("Go to your app");
+        var t = document.createTextNode("Go To Your App");
         btn.appendChild(t);
-        btn.className = "btn btn-square btn-lg btn-filled-green";
+        btn.className = "btn btn-square btn-lg";
         btn.setAttribute("target", "_blank");
         if (firstURL.includes("localhost")) {
             btn.setAttribute("href", firstURL);
@@ -90,6 +90,7 @@ function extractHostname(pageURL) {
 
 // update metadata
 document.getElementById("updateMeta").onclick = function () {
+
   // url configuration
   var urlValue = document.getElementById("newURL").value;
   var urlList = urlValue.split(",").map((v) => v.trim());
@@ -157,6 +158,18 @@ chrome.storage.sync.get("lightningSwitch", function (data) {
     };
     if (lightningStatus === true) {
         document.getElementById("checkbox3").checked = true;
+    }
+});
+
+//Turn Adopt option on/off
+chrome.storage.sync.get("adoptSwitch", function (data) {
+    adoptStatus = data.adoptSwitch;
+    document.getElementById("checkbox4").onclick = function () {
+        chrome.storage.sync.set({ adoptSwitch: !adoptStatus });
+        location.reload();
+    };
+    if (adoptStatus === true) {
+        document.getElementById("checkbox4").checked = true;
     }
 });
 
