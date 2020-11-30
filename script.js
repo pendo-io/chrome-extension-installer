@@ -123,7 +123,6 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOpt
             y.async = !0;
             y.src = "https://cdn.pendo.io/agent/static/" + apiKey + "/pendo.js";
             z = e.getElementsByTagName(n)[0];
-            console.log('z: ', z);
             z.parentNode.insertBefore(y, z);
         })(window, document, "script", "pendo");
 
