@@ -1,4 +1,12 @@
 function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOption) {
+    // pendo snippet depends on there being at least 1 script element, but there may not be since this script removes itself
+    // so we have to create a blank script element in that case
+    var scripts = document.getElementsByTagName('script');
+    if (scripts.length == 0) {
+        var s = document.createElement('script');
+        document.head.appendChild(s);
+    }
+
     if (_lightningOption) {
         (function (apiKey) {
             (function (p, e, n, d, o) {
@@ -115,6 +123,7 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOpt
             y.async = !0;
             y.src = "https://cdn.pendo.io/agent/static/" + apiKey + "/pendo.js";
             z = e.getElementsByTagName(n)[0];
+            console.log('z: ', z);
             z.parentNode.insertBefore(y, z);
         })(window, document, "script", "pendo");
 
