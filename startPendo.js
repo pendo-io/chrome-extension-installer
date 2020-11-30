@@ -1,7 +1,7 @@
 var includedDomains = [];
 var pendoIsActive;
 
-chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accountId', 'lightningSwitch'], function(data) {
+chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accountId', 'lightningSwitch', 'adoptSwitch'], function(data) {
     includedDomains = data.pendoURL;
     var pendoSwitch = data.pendoSwitch;
     var thisFrameUrl = new URL(window.location.href);
@@ -9,6 +9,7 @@ chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accou
     var visitorId = data.visitorId;
     var accountId = data.accountId;
     var lightningOption = !!data.lightningSwitch;
+    var adoptOption = !!data.adoptSwitch;
 
     if (
         !!pendoSwitch &&
@@ -20,7 +21,7 @@ chrome.storage.sync.get(['pendoSwitch','pendoURL','pendoKey','visitorId', 'accou
 
         script.onload = function () {
             this.remove();
-            window.postMessage({ type: "pendoInjectorKey", keyValue: keyValue, visitorIdValue: visitorId, accountIdValue: accountId, lightningValue: lightningOption }, "*");
+            window.postMessage({ type: "pendoInjectorKey", keyValue: keyValue, visitorIdValue: visitorId, accountIdValue: accountId, lightningValue: lightningOption, adoptValue: adoptOption }, "*");
         };
 
         (document.head || document.documentElement).appendChild(script);

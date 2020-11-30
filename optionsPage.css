@@ -2,7 +2,7 @@
 
 body {
   background-color: #eeeeee;
-  width: 100vw;
+  width: 100%;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
@@ -43,7 +43,7 @@ form {
 
 .form-field {
   font-family: 'Montserrat', sans-serif;
-  width: 30%;
+  width: 36%;
   font-size: 16px;
   padding: 15px 4px;
   background: transparent;
@@ -99,7 +99,7 @@ label,
 }
 
 .btn:hover {
-  background-color:#b71542;
+  background-color:#d8174d;
   cursor: pointer;
 }
 
@@ -111,6 +111,7 @@ label,
   font-size: 1.2em;
   padding: 15px;
   margin-left: 5px;
+  width: 36%;
 }
 
 .btn-filled-green {
@@ -159,12 +160,20 @@ label,
   transition: .4s;
 }
 
+.slider:hover {
+  background-color: #6d6d6d;
+}
+
+input:checked + .slider:hover {
+  background-color: #98bfb8;
+}
+
 input:checked + .slider {
-  background-color: #ec2059;
+  background-color: #A8D6CD;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #ec2059;
+  box-shadow: 0 0 1px #A8D6CD;
 }
 
 input:checked + .slider:before {
@@ -196,3 +205,4 @@ input:checked + .slider:before {
 .switch-group {
   margin-top: 25px;
 }
+

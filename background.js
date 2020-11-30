@@ -77,6 +77,7 @@ var requiredHeaders = [
     { dir: "script-src", src: "'unsafe-eval'" },
     { dir: "script-src", src: "'self'" },
     { dir: "script-src", src: "app.pendo.io" },
+    { dir: "script-src", src: "adopt.pendo.io" },
     { dir: "script-src", src: "pendo-io-static.storage.googleapis.com" },
     { dir: "script-src", src: "cdn.pendo.io" },
     { dir: "script-src", src: `*.storage.googleapis.com` },
@@ -84,20 +85,25 @@ var requiredHeaders = [
     { dir: "style-src", src: "'unsafe-inline'" },
     { dir: "style-src", src: "'self'" },
     { dir: "style-src", src: "app.pendo.io" },
+    { dir: "style-src", src: "adopt.pendo.io" },
     { dir: "style-src", src: "cdn.pendo.io" },
     { dir: "style-src", src: `*.storage.googleapis.com` },
     { dir: "img-src", src: "'self'" },
     { dir: "img-src", src: "cdn.pendo.io" },
     { dir: "img-src", src: "app.pendo.io" },
+    { dir: "img-src", src: "adopt.pendo.io" },
     { dir: "img-src", src: `*.storage.googleapis.com` },
     { dir: "connect-src", src: "'self'" },
     { dir: "connect-src", src: "app.pendo.io" },
+    { dir: "connect-src", src: "adopt.pendo.io" },
     { dir: "connect-src", src: `*.storage.googleapis.com` },
     { dir: "connect-src", src: "data.pendo.io" },
     { dir: "frame-src", src: "'self'" },
     { dir: "frame-src", src: "app.pendo.io" },
+    { dir: "frame-src", src: "adopt.pendo.io" },
     { dir: "child-src", src: "'self'" },
     { dir: "child-src", src: "app.pendo.io" },
+    { dir: "child-src", src: "adopt.pendo.io" }
 ];
 
 function extractHostname(pageURL) {
