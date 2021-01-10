@@ -129,47 +129,48 @@ document.getElementById("updateMeta").onclick = function () {
 // chrome.storage.sync.set({cspSwitch: true});
 chrome.storage.sync.get("cspSwitch", function (data) {
     var cspStatus = data.cspSwitch;
-    document.getElementById("checkbox").onclick = function () {
+    document.getElementById("checkbox_csp").onclick = function () {
         chrome.storage.sync.set({ cspSwitch: !cspStatus });
         location.reload();
     };
     if (cspStatus === true) {
-        document.getElementById("checkbox").checked = true;
-    }
-});
-//Turn Pendo extension on/off
-chrome.storage.sync.get("pendoSwitch", function (data) {
-    pendoStatus = data.pendoSwitch;
-    document.getElementById("checkbox2").onclick = function () {
-        chrome.storage.sync.set({ pendoSwitch: !pendoStatus });
-        location.reload();
-    };
-    if (pendoStatus === true) {
-        document.getElementById("checkbox2").checked = true;
+        document.getElementById("checkbox_csp").checked = true;
     }
 });
 
 //Turn Lightning option extension on/off
 chrome.storage.sync.get("lightningSwitch", function (data) {
     lightningStatus = data.lightningSwitch;
-    document.getElementById("checkbox3").onclick = function () {
+    document.getElementById("checkbox_lightning").onclick = function () {
         chrome.storage.sync.set({ lightningSwitch: !lightningStatus });
         location.reload();
     };
     if (lightningStatus === true) {
-        document.getElementById("checkbox3").checked = true;
+        document.getElementById("checkbox_lightning").checked = true;
     }
 });
 
 //Turn Adopt option on/off
 chrome.storage.sync.get("adoptSwitch", function (data) {
     adoptStatus = data.adoptSwitch;
-    document.getElementById("checkbox4").onclick = function () {
+    document.getElementById("checkbox_adopt").onclick = function () {
         chrome.storage.sync.set({ adoptSwitch: !adoptStatus });
         location.reload();
     };
     if (adoptStatus === true) {
-        document.getElementById("checkbox4").checked = true;
+        document.getElementById("checkbox_adopt").checked = true;
+    }
+});
+
+//Turn Pendo extension on/off
+chrome.storage.sync.get("pendoSwitch", function (data) {
+    pendoStatus = data.pendoSwitch;
+    document.getElementById("checkbox_onoff").onclick = function () {
+        chrome.storage.sync.set({ pendoSwitch: !pendoStatus });
+        location.reload();
+    };
+    if (pendoStatus === true) {
+        document.getElementById("checkbox_onoff").checked = true;
     }
 });
 
