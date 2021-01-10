@@ -45,27 +45,24 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOpt
               id: visitorId
             },
             account: {
-              id: accountId,
+              id: accountId
             },
         });
-
-    } 
+    }
 
     else if (_adoptOption) {
-
         if(!!window.parent.pendo) {
-
-            pendo.identify(
-              visitorId,
-              "Adopt Account"
-            );        
-
-            console.log("PE Adopt Mode On");            
-
+            pendo.identify({
+                visitor: {
+                  id: visitorId
+                },
+                account: {
+                  id: "Adopt Account"
+                },
+            });
+            console.log("PE Adopt Mode On");
         }
-
         else {
-
             (function (p, e, n, d, o) {
                 var v, w, x, y, z;
                 o = p[d] = p[d] || {};
@@ -90,19 +87,14 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOpt
 
             pendo.initialize({
                 visitor: {
-                    id: visitorId,
+                    id: visitorId
                 },
-
                 account: {
-                    id: accountId,
+                    id: accountId
                 },
             });
-
         }
-
-
-    } 
-
+    }
     else {
         (function (p, e, n, d, o) {
             var v, w, x, y, z;
@@ -128,11 +120,10 @@ function pendoFunction(apiKey, visitorId, accountId, _lightningOption, _adoptOpt
 
         pendo.initialize({
             visitor: {
-                id: visitorId,
+                id: visitorId
             },
-
             account: {
-                id: accountId,
+                id: accountId
             },
         });
     }
