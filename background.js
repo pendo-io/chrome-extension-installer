@@ -92,6 +92,7 @@ var requiredHeaders = [
     { dir: "img-src", src: "cdn.pendo.io" },
     { dir: "img-src", src: "app.pendo.io" },
     { dir: "img-src", src: "adopt.pendo.io" },
+    { dir: "img-src", src: "data.pendo.io" },
     { dir: "img-src", src: `*.storage.googleapis.com` },
     { dir: "default-src", src: "data.pendo.io" },
     { dir: "connect-src", src: "'self'" },
